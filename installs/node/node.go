@@ -6,19 +6,14 @@ import (
 	"github.com/L-Chris/fe-init/utils"
 )
 
-func Install(nodeVersion string, yarnVersion string)  {
-	var nodeUrl = fmt.Sprintf("https://nodejs.org/download/release/v%s/node-v%s-x64.msi", nodeVersion, nodeVersion)
-	var yarnUrl = fmt.Sprintf("https://github.com/yarnpkg/yarn/releases/download/v%s/yarn-%s.msi", yarnVersion, yarnVersion)
+func Install(version string)  {
+	var url = fmt.Sprintf("https://nodejs.org/download/release/v%s/node-v%s-x64.msi", version, version)
 
 	// download
-	var isNodeDownloaded = utils.Download(nodeUrl, "node.msi")
-	var isYarnDownloaded = utils.Download(yarnUrl, "yarn.msi")
+	var isDownloaded = utils.Download(url, "node.msi")
 
 	// install
-	if (isNodeDownloaded) {
+	if (isDownloaded) {
 		exec.Command("msiexec", "/i", "node.msi").Run()
-	}
-	if (isYarnDownloaded) {
-		exec.Command("msiexec", "/i", "yarn.msi").Run()
 	}
 }
