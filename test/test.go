@@ -1,9 +1,19 @@
 package main
 
 import (
-	"os/exec"
+	"fmt"
+	"os"
 )
 
 func main() {
-	exec.Command("yarn", "global", "add", "@vue/cli", "whistle").Run()
+	f, err := os.Create("whistle.bat")
+	if (err != nil) {
+		fmt.Println(err.Error())
+	} else {
+		_, err = f.Write([]byte("w2 start"))
+	}
+
+	f.Close()
+
+	os.Rename("whistle.bat", "test/whistle.bat")
 }
